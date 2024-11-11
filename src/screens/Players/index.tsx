@@ -1,25 +1,35 @@
-import { Header } from "@components/Header";
-import { Input } from "@components/Input";
+import { FlatList } from "react-native";
+import { useState } from "react";
+import { useRoute } from "@react-navigation/native";
 
 import { Container, Form, HeaderList, NumberOfPlayers } from "./styled";
+
+import { Header } from "@components/Header";
+import { Input } from "@components/Input";
 import { Highlight } from "@components/Highlight";
 import { ButtonIcon } from "@components/ButtonIcon";
 import { Filter } from "@components/Filter";
-import { FlatList } from "react-native";
-import { useState } from "react";
 import { PlayerCard } from "@components/PlayerCard";
 import { ListEmpty } from "@components/ListEmpty";
 import { Button } from "@components/Button";
+
+type RouteParams = {
+  group: string;
+};
 
 export default function Players() {
   const [team, setTeam] = useState("Time 1");
   const [players, setPlayers] = useState(["Abner", "Ana", "Bruno", "Carlos"]);
 
+  const route = useRoute();
+
+  const { group } = route.params as RouteParams;
+
   return (
     <Container>
       <Header showBackButton />
       <Highlight
-        title="Jogadores"
+        title={group}
         subtitle="Adicione a galera e separe os times para jogar"
       />
       <Form>
