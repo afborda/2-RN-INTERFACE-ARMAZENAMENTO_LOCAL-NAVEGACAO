@@ -16,6 +16,9 @@ export default function NewGroup() {
 
   async function handleNew() {
     try {
+      if (group.trim().length === 0)
+        return Alert.alert("Novo Grupo", "Informe o nome do grupo");
+
       await groupCreate(group);
       navigation.navigate("players", { group: group });
     } catch (error) {
